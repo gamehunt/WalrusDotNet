@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  bot:
+    build: .
+    container_name: walrus_bot
+    restart: always
+    environment:
+      HTTP_PROXY: 'http://172.17.0.1:2081'
+      HTTPS_PROXY: 'http://172.17.0.1:2081'

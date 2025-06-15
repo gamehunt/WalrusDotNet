@@ -1,0 +1,5 @@
+bin/
+obj/
+.antlr/
+Lang/Generated/
+.env
