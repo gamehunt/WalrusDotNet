@@ -16,4 +16,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /App
 COPY --from=build /App/out .
 COPY .env .
-ENTRYPOINT ["dotnet", "SecrettellerDotNet.dll"]
+ENTRYPOINT ["dotnet", "WalrusDotNet.dll"]

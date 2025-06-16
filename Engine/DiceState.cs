@@ -31,9 +31,9 @@ public class DiceState : IRollElement {
             postfix = $"dh{Discard}";
         }
         if(Amount == 1) {
-            return $"[{list}] {Amount}d{Sides}{postfix}";
+            return $"[{list}] {Amount}d{Sides}{postfix} ";
         } else {
-            return $"[{list}] ({Result}) {Amount}d{Sides}{postfix}";
+            return $"[{list}] ({Result}) {Amount}d{Sides}{postfix} ";
         }
     }
 
