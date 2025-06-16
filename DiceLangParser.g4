@@ -5,15 +5,16 @@ options { tokenVocab=DiceLangLexer; }
  * Parser rules
  */
 
-message: valid_expression label? EOF;
+message: FORCE_CALC_MARKER? valid_expression label? EOF;
 
 valid_expression
     : repeated_expr
     | expr
     | initiative
+    | list
     ;
 
-repeated_expr: INTEGER REPEATER expr ;
+repeated_expr: amount=INTEGER REPEATER expr ;
 
 expr
     : expr POW expr # powExpr
@@ -34,12 +35,20 @@ numeric
     ;
 
 dice
-    : amount=INTEGER? DICE_MARKER sides=INTEGER
+    : amount=INTEGER? DICE sides=INTEGER dice_discard_group?
+    ;
+
+dice_discard_group
+    : DICE discard=(LIST|DISCARD_HI)? amount=INTEGER
     ;
     
 label
     : LABEL
     ;
 
-initiative: INIT LSQBRACE initiative_contestant (LIST_SEP initiative_contestant)* RSQBRACE ;
-initiative_contestant: LBRACE STRING LIST_SEP_ALT (PLUS|MINUS) INTEGER (PLUS)? RBRACE ;
+list
+    : amount=INTEGER? UNIQ? LIST LSQBRACE items+=STRING (LIST_SEP_ALT items+=STRING)* RSQBRACE
+    ;
+
+initiative: INIT LSQBRACE contestants+=initiative_contestant (LIST_SEP contestants+=initiative_contestant)* RSQBRACE ;
+initiative_contestant: LBRACE name=STRING LIST_SEP_ALT mod_sign=(PLUS|MINUS) mod=INTEGER advantage=(PLUS|MINUS)? RBRACE ;

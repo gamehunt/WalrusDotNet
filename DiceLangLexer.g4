@@ -9,7 +9,11 @@ FLOAT: INTEGER DOT INTEGER ;
 INTEGER: [0-9]+ ;
 
 fragment DOT: '.' ;
-DICE_MARKER: 'd' ;
+DICE: 'd' ;
+DISCARD_HI: 'h' ;
+FORCE_CALC_MARKER: 'r' | '&';
+LIST: 'l';
+UNIQ: 'u';
 
 /* Operations */
 PLUS: '+' ;
